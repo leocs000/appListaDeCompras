@@ -10,26 +10,11 @@ class Todo {
   });
 }
 
-// class MyApp extends StatefulWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//         home: Lista()
-//     );
-//   }
-//
-//   @override
-//   State<StatefulWidget> createState() {
-//     // TODO: implement createState
-//     throw UnimplementedError();
-//   }
-// }
-
 class Lista extends StatefulWidget {
   @override
   _ListaCompra createState() => _ListaCompra();
 }
- 
+
 class _ListaCompra extends State<Lista> {
   final List<Todo> _todoList = [];
 
