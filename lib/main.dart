@@ -130,9 +130,7 @@ class TodoList extends StatefulWidget {
   _TextFieldWithButton createState() => _TextFieldWithButton();
 }
 
-
 class _TextFieldWithButton extends State<TodoList> {
-
   List<TodoItem> _todoList = [];
 
   TextEditingController _textFieldController = TextEditingController();
@@ -159,77 +157,103 @@ class _TextFieldWithButton extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
-    int i=0;
+    int i = 0;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Minhas Listas'),
-      ),
-      body: Column(
-
-        children: [
-          Expanded(
-              child: ListView.builder(
-                itemCount: _todoList.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-
-                    onTap: navigateToNewPage,
-                    child: Card(
-                      child: Padding(
-                        padding:
-                        EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              _todoList[index].title,
-                              style: TextStyle(
-                                decoration: _todoList[index].isDone
-                                    ? TextDecoration.lineThrough
-                                    : null,
+        appBar: AppBar(
+          backgroundColor: Color(0xFF00B15C),
+          centerTitle: true,
+          title: Text(
+            'Minhas Lista',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+        body: Container(
+          //padding: EdgeInsets.symmetric(vertical: 10.0,horizontal: 10.0),
+          color: Color(0xfff2f1f2),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _todoList.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: navigateToNewPage,
+                      child: Card(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                _todoList[index].title,
+                                style: TextStyle(
+                                  decoration: _todoList[index].isDone
+                                      ? TextDecoration.lineThrough
+                                      : null,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 50,)
-                          ],
+                              SizedBox(
+                                height: 50,
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Container(
+                height: 70,
+
+                color: Colors.red,//Color(0xfff2f1f2),
+                child:  Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 100,
+                      color: Colors.lightBlue,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.0),
+                        child: TextField(
+                          controller: _textFieldController,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric( horizontal: 12.0),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.only(bottomRight: Radius.circular(32))),
+                            hintText: 'Digite algo...',
+
+                            suffixIcon: Container(
+                              height: 57,
+                              width: 57,
+                              child: IconButton(
+                                icon: Icon(
+                                    Icons.add,
+                                    color: Color(0xFFFFFFFF),
+                                ),
+                                onPressed: () {
+                                  // Função do botão
+                                  String text = _textFieldController.text;
+                                  // Faça algo com o texto digitado
+                                  _addTodoItem(text);
+                                },
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xFF00B15C),
+                              ),
+                            )
+                          ),
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
-
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            color: Color(0xfffafafa),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 12.0),
-                    child: TextField(
-                      controller: _textFieldController,
-                      decoration: InputDecoration(
-                        hintText: 'Digite algo...',
-                      ),
-                    ),
                   ),
+                ],
                 ),
-                FloatingActionButton(
-                  onPressed: () {
-                    // Função do botão
-                    String text = _textFieldController.text;
-                    // Faça algo com o texto digitado
-                    _addTodoItem(text);
-                  },
-                  child: Icon(Icons.add),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
-
+        )
     );
   }
 }
@@ -239,4 +263,3 @@ void main() {
     home: TodoList(),
   ));
 }
-

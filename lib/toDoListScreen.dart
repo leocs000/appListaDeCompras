@@ -50,7 +50,15 @@ class _ToDoListScreenState extends State<ToDoListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('To-Do List'),
+        backgroundColor: Color(0xFF00B15C),
+        centerTitle: true,
+        title: Text(
+            'Minhas Lista',
+            style: TextStyle(
+                fontWeight: FontWeight.bold
+            ),
+
+        ),
       ),
       body: ListView.builder(
         itemCount: _tasks.length,
