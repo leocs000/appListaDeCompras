@@ -208,7 +208,7 @@ class TextFieldWithButton extends State<TodoList> {
               //AddItemInputButton(),
               Container(
                 height: 70,
-                color: Color(0xfff2f1f2),
+                color: Colors.white,//Color(0xfff2f1f2),
                 child:  Row(
                 children: [
                   Expanded(
@@ -263,3 +263,7 @@ void main() {
     home: TodoList(),
   ));
 }
+
+
+
+
