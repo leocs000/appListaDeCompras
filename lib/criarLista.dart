@@ -44,24 +44,26 @@ class _ListaCompra extends State<Lista> {
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) {
         final todo = _todoList[index];
-        return ListTile(
-          title: Text(
-            todo.title,
-            style: TextStyle(
-              decoration: todo.completed ? TextDecoration.lineThrough : null,
+        return Card(
+          child: ListTile(
+            title: Text(
+              todo.title,
+              style: TextStyle(
+                decoration: todo.completed ? TextDecoration.lineThrough : null,
+              ),
             ),
-          ),
-          leading: Checkbox(
-            value: todo.completed,
-            onChanged: (bool? value) {
-              _toggleTodoItem(index, value);
-            },
-          ),
-          trailing: IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () {
-              _removeTodoItem(index);
-            },
+            leading: Checkbox(
+              value: todo.completed,
+              onChanged: (bool? value) {
+                _toggleTodoItem(index, value);
+              },
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                _removeTodoItem(index);
+              },
+            ),
           ),
         );
       },
@@ -72,24 +74,68 @@ class _ListaCompra extends State<Lista> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Todo List',
+
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Todo List'),
+          backgroundColor: Color(0xFF00B15C),
+          centerTitle: true,
+          title: Text(
+            'Itens da lista',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
         body: Column(
           children: [
-            TextField(
-              controller: _textEditingController,
-              decoration: InputDecoration(
-                hintText: 'Add a new task',
-              ),
-              onSubmitted: (String value) {
-                _addTodoItem(value);
-              },
-            ),
             Expanded(
-              child: _buildTodoList(),
+              child: Container(
+                  color: Color(0xfff2f1f2),
+                  child: _buildTodoList(),
+              ),
+            ),
+            Container(
+              height: 70,
+              color: Color(0xfff2f1f2),
+              child:  Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.0),
+                        child: TextField(
+                          controller: _textEditingController,
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric( vertical: 20.0),
+                              border: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.only(bottomRight: Radius.circular(32))),
+                              hintText: 'Digite algo...',
+
+                              suffixIcon: Container(
+                                height: 57,
+                                width: 57,
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.add,
+                                    color: Color(0xFFFFFFFF),
+                                  ),
+                                  onPressed: () {
+                                    // Função do botão
+                                    String text = _textEditingController.text;
+                                    // Faça algo com o texto digitado
+                                    _addTodoItem(text);
+                                  },
+                                ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color(0xFF00B15C),
+                                ),
+                              )
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

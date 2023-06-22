@@ -118,6 +118,8 @@ class _TodoListState extends State<TodoList> {
 import 'package:flutter/material.dart';
 import 'package:listadecompras/criarLista.dart';
 
+import 'AddItemInputButton.dart';
+
 class TodoItem {
   String title;
   bool isDone;
@@ -127,10 +129,10 @@ class TodoItem {
 
 class TodoList extends StatefulWidget {
   @override
-  _TextFieldWithButton createState() => _TextFieldWithButton();
+  TextFieldWithButton createState() => TextFieldWithButton();
 }
 
-class _TextFieldWithButton extends State<TodoList> {
+class TextFieldWithButton extends State<TodoList> {
   List<TodoItem> _todoList = [];
 
   TextEditingController _textFieldController = TextEditingController();
@@ -180,8 +182,7 @@ class _TextFieldWithButton extends State<TodoList> {
                       onTap: navigateToNewPage,
                       child: Card(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 8.0, horizontal: 16.0),
+                          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -204,23 +205,22 @@ class _TextFieldWithButton extends State<TodoList> {
                   },
                 ),
               ),
+              //AddItemInputButton(),
               Container(
                 height: 70,
-
-                color: Colors.red,//Color(0xfff2f1f2),
+                color: Color(0xfff2f1f2),
                 child:  Row(
                 children: [
                   Expanded(
                     child: Container(
-                      height: 100,
-                      color: Colors.lightBlue,
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12.0),
                         child: TextField(
                           controller: _textFieldController,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric( horizontal: 12.0),
-                            border: OutlineInputBorder(borderRadius: BorderRadius.only(bottomRight: Radius.circular(32))),
+                            contentPadding: EdgeInsets.symmetric( vertical: 20.0),
+                            border: UnderlineInputBorder(
+                                borderRadius: BorderRadius.only(bottomRight: Radius.circular(32))),
                             hintText: 'Digite algo...',
 
                             suffixIcon: Container(
